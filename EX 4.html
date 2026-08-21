@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Technology Lab</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .main-container {
+            width: 100%;
+            border: 2px solid black;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 170px;
+            background-color: #2863ad;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flower-images {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .flower-images img {
+            width: 55px;
+            height: 70px;
+            object-fit: cover;
+            border: 1px solid white;
+            margin-right: -20px;
+        }
+
+        .flower-images img:nth-child(2) {
+            position: relative;
+            top: 30px;
+        }
+
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            display: flex;
+            height: 30px;
+            background-color: #999;
+        }
+
+        nav div {
+            width: 25%;
+            text-align: center;
+            padding: 7px;
+            font-size: 13px;
+        }
+
+        nav .active {
+            background-color: red;
+        }
+
+
+        /* ================= FAVORITES ================= */
+
+        .favorites {
+            height: 150px;
+            background-color: pink;
+            position: relative;
+        }
+
+        .favorite-box {
+            position: absolute;
+            top: 0;
+            left: 20%;
+            width: 170px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .favorite-title {
+            height: 22px;
+            background-color: green;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        .favorite-item {
+            height: 33px;
+            background-color: #9cff00;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 25px;
+            font-size: 11px;
+        }
+
+        .favorite-item.dark {
+            background-color: green;
+        }
+
+        .favorite-item img {
+            width: 20px;
+            height: 25px;
+            object-fit: cover;
+        }
+
+
+        /* ================= LOGIN SECTION ================= */
+
+        .login-section {
+
+            height: 300px;
+
+            /* YOUR KEYBOARD IMAGE */
+            background-image:
+                linear-gradient(
+                    rgba(0,0,0,0.35),
+                    rgba(0,0,0,0.35)
+                ),
+                url("file:///C:/Users/tonyt/OneDrive/Pictures/Saved%20Pictures/keyboard.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-box {
+            width: 195px;
+            min-height: 175px;
+
+            background-color: white;
+
+            border-radius: 12px;
+
+            padding: 15px;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            font-size: 15px;
+            margin: 0 0 12px 0;
+        }
+
+        .form-box label {
+            display: block;
+            font-size: 10px;
+            margin-top: 5px;
+            margin-bottom: 3px;
+        }
+
+        .form-box input {
+            width: 100%;
+            height: 22px;
+
+            border: none;
+
+            background-color: #ddd;
+
+            padding: 5px;
+
+            font-size: 9px;
+        }
+
+        .form-box button {
+            width: 100%;
+            height: 23px;
+
+            margin-top: 15px;
+
+            background-color: #0878f9;
+
+            color: white;
+
+            border: none;
+
+            font-size: 9px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            height: 55px;
+
+            background-color: #ffe0b2;
+
+            padding: 8px 15px;
+
+            font-size: 12px;
+
+            line-height: 20px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="main-container">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="flower-images">
+
+            <img
+                src="file:///C:/Users/tonyt/OneDrive/Pictures/Saved%20Pictures/flower.jpg"
+                alt="Flower"
+            >
+
+            <img
+                src="file:///C:/Users/tonyt/OneDrive/Pictures/Saved%20Pictures/flower.jpg"
+                alt="Flower"
+            >
+
+        </div>
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="active">Home</div>
+
+        <div>About</div>
+
+        <div>Shop</div>
+
+        <div>Offers</div>
+
+    </nav>
+
+
+    <!-- FAVORITES -->
+
+    <section class="favorites">
+
+        <div class="favorite-box">
+
+            <div class="favorite-title">
+                Favorites
+            </div>
+
+            <div class="favorite-item">
+
+                <span>Item 1</span>
+
+                <img
+                    src="file:///C:/Users/tonyt/OneDrive/Pictures/Saved%20Pictures/flower.jpg"
+                    alt="Flower"
+                >
+
+            </div>
+
+            <div class="favorite-item dark">
+
+                <span>Item 2</span>
+
+                <span>◉</span>
+
+            </div>
+
+            <div class="favorite-item">
+
+                <span>Item 3</span>
+
+                <span>◉</span>
+
+            </div>
+
+            <div class="favorite-item dark">
+
+                <span>Item 4</span>
+
+                <span>◉</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOGIN / SIGNUP -->
+
+    <section class="login-section">
+
+
+        <!-- SIGN IN -->
+
+        <div class="form-box">
+
+            <h2>Sign In</h2>
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                placeholder="Enter Username / Email / Phone Number"
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                placeholder="Enter Password"
+            >
+
+            <button>
+                Sign In
+            </button>
+
+        </div>
+
+
+        <!-- SIGN UP -->
+
+        <div class="form-box">
+
+            <h2>Sign Up</h2>
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                placeholder="Enter Name"
+            >
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                placeholder="Enter Email"
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                placeholder="Enter Password"
+            >
+
+            <button>
+                Sign Up
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <b><i>Your address</i></b>
+
+        <br>
+
+        <b>
+            © 2024-2028. (URK24CS1128) -
+            Web Technology Lab Batch 1.
+            All Rights Reserved.
+        </b>
+
+    </footer>
+
+
+</div>
+
+</body>
+</html>
