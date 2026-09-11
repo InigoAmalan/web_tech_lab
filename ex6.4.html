@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Image</title>
+
+    <style>
+        #img {
+            position: relative;
+            left: 0px;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+
+    <h3>URK24CS1128</h3>
+
+    <h1>Move Image</h1>
+
+    <button onclick="moveRight()">Move</button>
+    <button onclick="stop()">Stop</button>
+
+    <br><br>
+
+    <img id="img"
+         src="file:///C:/Users/tonyt/OneDrive/Pictures/photo-1614200179396-2bdb77ebf81b.avif">
+
+    <script>
+
+        var imgObj;
+        var animate;
+
+        function init() {
+
+            imgObj = document.getElementById("img");
+
+            imgObj.style.position = "relative";
+
+            imgObj.style.left = "0px";
+        }
+
+        function moveRight() {
+
+            imgObj.style.left =
+                parseInt(imgObj.style.left) + 1 + "px";
+
+            animate = setTimeout(moveRight, 10);
+        }
+
+        function stop() {
+
+            clearTimeout(animate);
+
+            imgObj.style.left = "0px";
+        }
+
+    </script>
+
+</body>
+</html>
