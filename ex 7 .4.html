@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f5f3ff);
+            color: #1f2937;
+        }
+
+        .dashboard {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            text-align: center;
+            color: #1d4ed8;
+            letter-spacing: 1px;
+        }
+
+        .panel {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .info-panel {
+            background: linear-gradient(180deg, #dbeafe, #eff6ff);
+            border: 2px solid #93c5fd;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .info-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(59, 130, 246, 0.18);
+        }
+
+        .info-panel h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            opacity: 0.96;
+        }
+
+        #addBtn {
+            background: #16a34a;
+        }
+
+        #updateBtn {
+            background: #f59e0b;
+        }
+
+        #deleteBtn {
+            background: #dc2626;
+        }
+
+        .table-panel {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            padding: 18px;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .table-header h3 {
+            margin: 0;
+            color: #111827;
+        }
+
+        .table-size {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1d4ed8;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #dbeafe;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            min-width: 500px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #eef2ff;
+            color: #3730a3;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+            color: #374151;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .selected-row {
+            background: #dbeafe !important;
+            box-shadow: inset 3px 0 0 #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <h2>URK24CS1128</h2>
+    <div class="dashboard">
+        <h2>Employee Management Dashboard</h2>
+
+        <div class="panel">
+            <div id="infoPanel" class="info-panel">
+                <h3>Employee Details</h3>
+
+                <div class="form-group">
+                    <label for="empId">Employee ID</label>
+                    <input type="text" id="empId" placeholder="Enter Employee ID">
+                </div>
+
+                <div class="form-group">
+                    <label for="empName">Employee Name</label>
+                    <input type="text" id="empName" placeholder="Enter Employee Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" placeholder="Enter Department">
+                </div>
+
+                <div class="button-row">
+                    <button id="addBtn" type="button">Add Employee</button>
+                    <button id="updateBtn" type="button">Update</button>
+                    <button id="deleteBtn" type="button">Remove</button>
+                </div>
+            </div>
+
+            <div class="table-panel">
+                <div class="table-header">
+                    <h3>Employee Records</h3>
+                    <span id="tableSize" class="table-size">Table Size: 0 x 0</span>
+                </div>
+
+                <table id="empTable">
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const $empId = $('#empId');
+            const $empName = $('#empName');
+            const $department = $('#department');
+            const $tableBody = $('#employeeTableBody');
+            const $table = $('#empTable');
+            const $tableSize = $('#tableSize');
+            let selectedRow = null;
+
+            function updateTableSize() {
+                const width = $table.width();
+                const height = $table.height();
+                $tableSize.text('Table Size: ' + Math.round(width) + ' x ' + Math.round(height));
+            }
+
+            function clearForm() {
+                $empId.val('');
+                $empName.val('');
+                $department.val('');
+                selectedRow = null;
+                $tableBody.find('tr').removeClass('selected-row');
+            }
+
+            $('#addBtn').click(function () {
+                const id = $.trim($empId.val());
+                const name = $.trim($empName.val());
+                const dept = $.trim($department.val());
+
+                if (!id || !name || !dept) {
+                    alert('Please fill in Employee ID, Name, and Department.');
+                    return;
+                }
+
+                const row = $('<tr></tr>');
+                row.append('<td>' + id + '</td>');
+                row.append('<td>' + name + '</td>');
+                row.append('<td>' + dept + '</td>');
+
+                row.click(function () {
+                    $tableBody.find('tr').removeClass('selected-row');
+                    $(this).addClass('selected-row');
+                    selectedRow = $(this);
+                    $empId.val($(this).find('td').eq(0).text());
+                    $empName.val($(this).find('td').eq(1).text());
+                    $department.val($(this).find('td').eq(2).text());
+                });
+
+                $tableBody.append(row);
+                clearForm();
+                updateTableSize();
+            });
+
+            $('#updateBtn').click(function () {
+                if (!selectedRow) {
+                    alert('Please select an employee row to update.');
+                    return;
+                }
+
+                const id = $.trim($empId.val());
+                const name = $.trim($empName.val());
+                const dept = $.trim($department.val());
+
+                if (!id || !name || !dept) {
+                    alert('Please enter valid values to update.');
+                    return;
+                }
+
+                selectedRow.find('td').eq(0).text(id);
+                selectedRow.find('td').eq(1).text(name);
+                selectedRow.find('td').eq(2).text(dept);
+
+                clearForm();
+                updateTableSize();
+            });
+
+            $('#deleteBtn').click(function () {
+                if (!selectedRow) {
+                    alert('Please select an employee row to remove.');
+                    return;
+                }
+
+                selectedRow.remove();
+                clearForm();
+                updateTableSize();
+            });
+
+            $(window).on('resize', function () {
+                updateTableSize();
+            });
+
+            updateTableSize();
+        });
+    </script>
+</body>
+</html>

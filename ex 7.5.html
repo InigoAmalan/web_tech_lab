@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Organization Explorer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1d4ed8;
+            margin-bottom: 25px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+        }
+
+        .tree-panel,
+        .details-panel {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            padding: 20px;
+        }
+
+        .org-tree {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .org-tree ul {
+            list-style: none;
+            margin-left: 18px;
+            padding-left: 18px;
+            border-left: 2px solid #cbd5e1;
+        }
+
+        .team {
+            font-weight: 700;
+            color: #312e81;
+            margin: 10px 0 8px;
+        }
+
+        .employee {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin: 8px 0;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .employee:hover {
+            background: #eef2ff;
+            border-color: #c7d2fe;
+        }
+
+        .selected {
+            background: #dbeafe !important;
+            border-color: #60a5fa !important;
+            box-shadow: inset 4px 0 0 #2563eb;
+        }
+
+        .details-panel {
+            background: linear-gradient(180deg, #eff6ff, #f8fafc);
+            border: 2px solid #bfdbfe;
+        }
+
+        .details-panel h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        .result-box {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #dbeafe;
+            padding: 14px 16px;
+            margin-top: 12px;
+        }
+
+        .result-box h4 {
+            margin: 0 0 10px;
+            color: #1d4ed8;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .selected-name {
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+    <h2>URK24CS1128</h2>
+    <div class="container">
+        <h2>Employee Organization Explorer</h2>
+
+        <div class="layout">
+            <div class="tree-panel">
+                <ul class="org-tree">
+                    <li>
+                        <div class="team">Executive Team</div>
+                        <ul>
+                            <li>
+                                <div class="team">Engineering</div>
+                                <ul>
+                                    <li class="employee" data-role="Senior Engineer">Ava Patel</li>
+                                    <li class="employee" data-role="Lead Developer">Daniel Smith</li>
+                                    <li class="employee" data-role="Frontend Engineer">Emma Wilson</li>
+                                    <li class="employee" data-role="Backend Engineer">Lucas Chen</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="team">Product</div>
+                                <ul>
+                                    <li class="employee" data-role="Product Manager">Sofia Garcia</li>
+                                    <li class="employee" data-role="UX Researcher">Noah Brown</li>
+                                    <li class="employee" data-role="Analyst">Mia Johnson</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="team">Operations</div>
+                                <ul>
+                                    <li class="employee" data-role="HR Manager">Olivia Martin</li>
+                                    <li class="employee" data-role="Operations Lead">Ethan Davis</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="details-panel">
+                <h3>Selected Employee</h3>
+                <div id="selectedName" class="selected-name">Choose an employee</div>
+
+                <div class="result-box">
+                    <h4>Parent Team</h4>
+                    <div id="parentTeam" class="tag-list"></div>
+                </div>
+
+                <div class="result-box">
+                    <h4>Ancestors</h4>
+                    <div id="ancestors" class="tag-list"></div>
+                </div>
+
+                <div class="result-box">
+                    <h4>Project Employees</h4>
+                    <div id="projectEmployees" class="tag-list"></div>
+                </div>
+
+                <div class="result-box">
+                    <h4>Teammates</h4>
+                    <div id="teammates" class="tag-list"></div>
+                </div>
+
+                <div class="result-box">
+                    <h4>Senior Employees</h4>
+                    <div id="seniorEmployees" class="tag-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const $employees = $('.employee');
+
+            function clearTags(selector) {
+                $(selector).empty();
+            }
+
+            function addTags(selector, values) {
+                if (!values.length) {
+                    $(selector).html('<span class="tag">None</span>');
+                    return;
+                }
+
+                values.forEach(function (value) {
+                    $(selector).append('<span class="tag">' + value + '</span>');
+                });
+            }
+
+            $employees.on('click', function () {
+                $employees.removeClass('selected');
+                $(this).addClass('selected');
+
+                const $emp = $(this);
+                const name = $emp.text();
+                const role = $emp.data('role');
+
+                $('#selectedName').text(name + ' - ' + role);
+
+                const $parentTeam = $emp.parent().closest('.team');
+                const $ancestorLabels = $emp.parentsUntil('.org-tree').filter('.team');
+                const $projectEmployees = $emp.closest('ul').find('.employee');
+                const $teammates = $emp.siblings('.employee');
+                const $seniorEmployees = $('.employee').filter(function () {
+                    return $(this).data('role').toLowerCase().includes('lead') ||
+                           $(this).data('role').toLowerCase().includes('manager') ||
+                           $(this).data('role').toLowerCase().includes('senior');
+                });
+
+                clearTags('#parentTeam');
+                clearTags('#ancestors');
+                clearTags('#projectEmployees');
+                clearTags('#teammates');
+                clearTags('#seniorEmployees');
+
+                addTags('#parentTeam', $parentTeam.length ? [$parentTeam.text().trim()] : ['None']);
+                addTags('#ancestors', $ancestorLabels.map(function () {
+                    return $(this).text().trim();
+                }).get());
+
+                addTags('#projectEmployees', $projectEmployees.map(function () {
+                    return $(this).text().trim();
+                }).get().filter(function (value) {
+                    return value !== name;
+                }));
+
+                addTags('#teammates', $teammates.map(function () {
+                    return $(this).text().trim();
+                }).get());
+
+                addTags('#seniorEmployees', $seniorEmployees.map(function () {
+                    return $(this).text().trim();
+                }).get());
+
+                $('#projectEmployees .tag').first().text('Project Group');
+                $('#teammates .tag').first().text('Teammates');
+
+                const firstEmployee = $('.employee').first().text();
+                const lastEmployee = $('.employee').last().text();
+                const eqEmployee = $('.employee').eq(2).text();
+
+                $('#selectedName').append('<div style="font-size:14px; color:#475569; margin-top:6px;">First: ' + firstEmployee + ' | Last: ' + lastEmployee + ' | Eq(2): ' + eqEmployee + '</div>');
+            });
+        });
+    </script>
+</body>
+</html>
