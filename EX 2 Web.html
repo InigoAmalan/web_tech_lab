@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume - Inigo Amalan</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    border:2px solid black;
+    padding:15px;
+}
+
+/* Header */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.profile{
+    width:120px;
+    height:120px;
+    border-radius:5px;
+    object-fit:cover;
+}
+
+.name{
+    font-size:36px;
+    font-weight:bold;
+    margin-right:120px;
+}
+
+/* Navigation */
+
+.nav{
+    margin-top:15px;
+    padding:10px 0;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+}
+
+.nav a{
+    margin-right:40px;
+    color:purple;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.search{
+    padding:5px;
+}
+
+/* Skills and Video */
+
+.container{
+    display:flex;
+    margin-top:20px;
+}
+
+.left{
+    width:35%;
+}
+
+.right{
+    width:65%;
+    text-align:center;
+}
+
+.skill{
+    margin-bottom:12px;
+}
+
+.bar{
+    background:#ddd;
+    width:150px;
+    height:18px;
+}
+
+.fill{
+    background:green;
+    height:18px;
+}
+
+/* Forms */
+
+.forms{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+}
+
+fieldset{
+    width:48%;
+}
+
+input, select, textarea{
+    width:95%;
+    padding:5px;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+input[type="radio"],
+input[type="checkbox"]{
+    width:auto;
+}
+
+/* Bottom PDF and Map */
+
+.bottom{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+}
+
+.bottom-box{
+    width:50%;
+}
+
+iframe{
+    width:100%;
+    height:300px;
+    border:1px solid #777;
+}
+
+/* Footer */
+
+.footer{
+    margin-top:20px;
+    border-top:1px solid #ccc;
+    padding-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <img
+        src="C:\Users\tonyt\OneDrive\Pictures\Saved Pictures\passport photo.jpg"
+        alt="Inigo Amalan Profile Photo"
+        class="profile"
+    >
+
+    <div class="name">
+        Mr. Inigo Amalan
+    </div>
+
+</div>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<div class="nav">
+
+    <a href="#">Academics</a>
+
+    <a href="#">Achievements</a>
+
+    <a href="#">Friends</a>
+
+    <input
+        type="text"
+        class="search"
+        placeholder="Search"
+    >
+
+</div>
+
+
+<!-- ================= SKILLS + VIDEO ================= -->
+
+<div class="container">
+
+    <div class="left">
+
+        <div class="skill">
+            <b>HTML</b>
+
+            <div class="bar">
+                <div
+                    class="fill"
+                    style="width:95%;">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="skill">
+            <b>Python</b>
+
+            <div class="bar">
+                <div
+                    class="fill"
+                    style="width:90%;">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="skill">
+            <b>Java</b>
+
+            <div class="bar">
+                <div
+                    class="fill"
+                    style="width:85%;">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="skill">
+            <b>Data Science</b>
+
+            <div class="bar">
+                <div
+                    class="fill"
+                    style="width:80%;">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="skill">
+            <b>Cyber Security</b>
+
+            <div class="bar">
+                <div
+                    class="fill"
+                    style="width:88%;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ================= VIDEO ================= -->
+
+    <div class="right">
+
+        <video
+            width="350"
+            height="200"
+            controls>
+
+            <source
+                src="file:///C:/Users/tonyt/Downloads/Video_Script_%E2%80%93_seconds___.mp4"
+                type="video/mp4">
+
+            Your browser does not support the video element.
+
+        </video>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PERSONAL + CONTACT ================= -->
+
+<div class="forms">
+
+
+    <!-- PERSONAL INFORMATION -->
+
+    <fieldset>
+
+        <legend>
+            <b>Personal Information</b>
+        </legend>
+
+
+        User Name:
+
+        <input
+            type="text"
+            value="Inigo Amalan"
+        >
+
+
+        Password:
+
+        <input
+            type="password"
+            value="Inigo@2007"
+        >
+
+
+        Register Number:
+
+        <input
+            type="text"
+            value="URK24CS1128"
+        >
+
+
+        Age:
+
+        <input
+            type="number"
+            value="19"
+        >
+
+
+        Gender:
+
+        <input
+            type="radio"
+            name="gender"
+            checked
+        >
+
+        Male
+
+
+        <input
+            type="radio"
+            name="gender"
+        >
+
+        Female
+
+        <br><br>
+
+
+        DOB:
+
+        <input
+            type="date"
+            value="2007-07-26"
+        >
+
+
+        Favorite Color:
+
+        <input
+            type="text"
+            value="Green"
+        >
+
+
+        Change Profile Photo:
+
+        <input
+            type="file"
+        >
+
+    </fieldset>
+
+
+
+    <!-- CONTACT INFORMATION -->
+
+    <fieldset>
+
+        <legend>
+            <b>Contact Information</b>
+        </legend>
+
+
+        Address:
+
+        <textarea rows="3">Karunya Institute of Technology and Sciences,
+Coimbatore, Tamil Nadu, India.</textarea>
+
+
+        State:
+
+        <select>
+
+            <option selected>
+                Tamil Nadu
+            </option>
+
+        </select>
+
+
+        Zipcode:
+
+        <input
+            type="text"
+            value="641114"
+        >
+
+
+        Mobile:
+
+        <input
+            type="text"
+            value="9876543210"
+        >
+
+
+        Email:
+
+        <input
+            type="email"
+            value="Inigoamalan@karunya.edu.in"
+        >
+
+
+        URL:
+
+        <input
+            type="url"
+            value="https://www.karunya.edu"
+        >
+
+
+        <input
+            type="checkbox"
+            checked
+        >
+
+        Verified
+
+        <br><br>
+
+
+        <input
+            type="submit"
+            value="Submit"
+        >
+
+    </fieldset>
+
+</div>
+
+
+<!-- ================= PDF + GOOGLE MAP ================= -->
+
+<div class="bottom">
+
+
+    <!-- PDF -->
+
+    <div class="bottom-box">
+
+        <iframe
+            src="Web Tech 2nd and 3rd exercise 24-07-2026.pdf"
+            title="Web Technology Lab PDF">
+        </iframe>
+
+    </div>
+
+
+    <!-- GOOGLE MAP -->
+
+    <div class="bottom-box">
+
+        <iframe
+            src="https://maps.google.com/maps?q=Karunya%20Institute%20of%20Technology%20and%20Sciences&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            title="Karunya University Map">
+        </iframe>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+
+    <p>
+        <b>Address:</b>
+        Karunya Institute of Technology and Sciences,
+        Coimbatore, Tamil Nadu - 641114
+    </p>
+
+
+    <p>
+        © 2026-2027 (URK24CS1128) -
+        Web Technology Lab Batch 1.
+        All Rights Reserved.
+    </p>
+
+
+    <p>
+        <b>Department:</b>
+        Computer Science and Engineering (CSE)
+    </p>
+
+
+    <p>
+        <b>Achievements:</b>
+        Developed freelance websites,
+        participated in multiple hackathons,
+        built cybersecurity projects,
+        and worked on data science applications.
+    </p>
+
+</div>
+
+
+</body>
+</html>

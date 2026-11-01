@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Calculator</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: black;
+            color: white;
+            padding: 10px;
+        }
+
+        input {
+            width: 80px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+        }
+
+        .box {
+            display: inline-block;
+            padding: 15px;
+            margin: 10px;
+            color: white;
+        }
+
+        #rentBox {
+            background-color: blue;
+        }
+
+        #accessoryBox {
+            background-color: green;
+        }
+
+        #emergencyBox {
+            background-color: navy;
+        }
+
+        #savingBox {
+            background-color: deeppink;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#calculate").click(function () {
+
+                let amount = parseFloat($("#amount").val());
+
+                let rent = parseFloat($("#rent").val());
+                let accessory = parseFloat($("#accessory").val());
+                let emergency = parseFloat($("#emergency").val());
+                let saving = parseFloat($("#saving").val());
+
+                let total = rent + accessory + emergency + saving;
+
+                if (total != 100) {
+                    alert("Percentage values must add up to 100%");
+                    return;
+                }
+
+                let rentAmount = amount * rent / 100;
+                let accessoryAmount = amount * accessory / 100;
+                let emergencyAmount = amount * emergency / 100;
+                let savingAmount = amount * saving / 100;
+
+                $("#rentBox").html("Room Rent<br>Rs." + rentAmount);
+                $("#accessoryBox").html("Accessories<br>Rs." + accessoryAmount);
+                $("#emergencyBox").html("Emergency<br>Rs." + emergencyAmount);
+                $("#savingBox").html("Saving<br>Rs." + savingAmount);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h2>URK24CS1128</h2>
+
+    <h2>Budget Calculator App</h2>
+
+    <h3>Enter Amount that you want to Manage</h3>
+
+    <input type="text" id="amount" value="15000">
+
+    <h3>How would you like to divide your money?</h3>
+
+    Room Rent(%):
+    <input type="text" id="rent" value="50">
+
+    Accessories(%):
+    <input type="text" id="accessory" value="20">
+
+    Emergency(%):
+    <input type="text" id="emergency" value="20">
+
+    Saving(%):
+    <input type="text" id="saving" value="10">
+
+    <br><br>
+
+    <button id="calculate">Evaluate My Money</button>
+
+    <br><br>
+
+    <div id="rentBox" class="box">Room Rent</div>
+
+    <div id="accessoryBox" class="box">Accessories</div>
+
+    <div id="emergencyBox" class="box">Emergency</div>
+
+    <div id="savingBox" class="box">Saving</div>
+
+</body>
+</html>
