@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Programs - URK24CS1128</title>
+</head>
+
+<body>
+
+<h1>JavaScript Programs - URK24CS1128</h1>
+
+<hr>
+
+
+
+<h2>1. Shortest and Longest Word</h2>
+
+<button onclick="checkWords()">Check Words</button>
+
+<p id="wordOutput"></p>
+
+<script>
+function checkWords() {
+    var text = "Web Development Tutorial";
+    var list = text.split(" ");
+
+    var small = list[0];
+    var big = list[0];
+
+    for (var i = 1; i < list.length; i++) {
+        if (list[i].length < small.length) {
+            small = list[i];
+        }
+
+        if (list[i].length > big.length) {
+            big = list[i];
+        }
+    }
+
+    document.getElementById("wordOutput").innerHTML =
+        "Shortest Word: " + small + "<br>" +
+        "Longest Word: " + big;
+}
+</script>
+
+<hr>
+
+
+
+<h2>2. BMI Calculator</h2>
+
+Enter Weight in kg:
+<input type="text" id="weight">
+
+<br><br>
+
+Enter Height in cm:
+<input type="text" id="height">
+
+<br><br>
+
+<button onclick="getBMI()">Calculate BMI</button>
+
+<p id="bmiResult"></p>
+
+<script>
+function getBMI() {
+    var weight = parseFloat(document.getElementById("weight").value);
+    var height = parseFloat(document.getElementById("height").value);
+
+    var meter = height / 100;
+    var bmi = weight / (meter * meter);
+
+    var body;
+
+    if (bmi < 18) {
+        body = "Underweight";
+    }
+    else if (bmi < 25) {
+        body = "Normal";
+    }
+    else if (bmi < 30) {
+        body = "Overweight";
+    }
+    else {
+        body = "Obese";
+    }
+
+    document.getElementById("bmiResult").innerHTML =
+        "BMI: " + bmi.toFixed(2) + "<br>" +
+        "Body Type: " + body;
+}
+</script>
+
+<hr>
+
+
+
+<h2>3. Fruit Farm</h2>
+
+Enter Rows:
+<input type="text" id="row">
+
+<br><br>
+
+Enter Columns:
+<input type="text" id="col">
+
+<br><br>
+
+<button onclick="createFarm()">Create Farm</button>
+
+<br><br>
+
+<div id="farm"></div>
+
+<script>
+function createFarm() {
+    var row = parseInt(document.getElementById("row").value);
+    var col = parseInt(document.getElementById("col").value);
+
+    var fruit = [
+        "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=200",
+        "https://images.unsplash.com/photo-1547514701-42782101795e?w=200"
+    ];
+
+    var result = "";
+
+    for (var i = 0; i < row; i++) {
+
+        for (var j = 0; j < col; j++) {
+
+            var choice = Math.floor(Math.random() * fruit.length);
+
+            result +=
+                "<img src='" + fruit[choice] +
+                "' width='100' height='100' style='margin:5px;'>";
+        }
+
+        result += "<br>";
+    }
+
+    document.getElementById("farm").innerHTML = result;
+}
+</script>
+
+<hr>
+
+
+
+<h2>4. Currency Converter</h2>
+
+Enter Amount:
+<input type="text" id="amount">
+
+<br><br>
+
+From:
+
+<select id="source">
+    <option>Indian Rupee</option>
+    <option>US Dollar</option>
+</select>
+
+&nbsp; To: &nbsp;
+
+<select id="target">
+    <option>US Dollar</option>
+    <option>Indian Rupee</option>
+</select>
+
+<br><br>
+
+<button onclick="changeCurrency()">Convert</button>
+
+<p id="currencyAnswer"></p>
+
+<script>
+function changeCurrency() {
+
+    var amount =
+        parseFloat(document.getElementById("amount").value);
+
+    var source =
+        document.getElementById("source").value;
+
+    var target =
+        document.getElementById("target").value;
+
+    var converted;
+
+    if (source == "Indian Rupee" &&
+        target == "US Dollar") {
+
+        converted = amount * 0.015;
+    }
+
+    else if (source == "US Dollar" &&
+             target == "Indian Rupee") {
+
+        converted = amount * 67.12;
+    }
+
+    else {
+        converted = amount;
+    }
+
+    document.getElementById("currencyAnswer").innerHTML =
+        "Converted Amount: " + converted.toFixed(2);
+}
+</script>
+
+<hr>
+
+
+
+<h2>5. Heads or Tails</h2>
+
+<img
+    id="coin"
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/US%20One%20Cent%20Obv.png"
+    width="180"
+    height="180"
+>
+
+<br><br>
+
+<button onclick="flipCoin()">Flip Coin</button>
+
+<p>
+    Heads: <span id="heads">0</span>
+    <br>
+    Tails: <span id="tails">0</span>
+</p>
+
+<h3>Coin Reference</h3>
+
+<img
+    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/US%20union%20shield%20penny%20reverse.png"
+    width="180"
+    height="180"
+>
+
+<p>Heads and Tails sides of a coin</p>
+
+<script>
+var headCount = 0;
+var tailCount = 0;
+
+var headsImage =
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/US%20One%20Cent%20Obv.png";
+
+var tailsImage =
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/US%20union%20shield%20penny%20reverse.png";
+
+function flipCoin() {
+
+    var result = Math.floor(Math.random() * 2);
+
+    if (result == 0) {
+
+        document.getElementById("coin").src =
+            headsImage;
+
+        headCount++;
+    }
+
+    else {
+
+        document.getElementById("coin").src =
+            tailsImage;
+
+        tailCount++;
+    }
+
+    document.getElementById("heads").innerHTML =
+        headCount;
+
+    document.getElementById("tails").innerHTML =
+        tailCount;
+}
+</script>
+
+<hr>
+
+
+
+<h2>6. Birthday Cake Order</h2>
+
+Half Kg Cakes:
+<input type="text" id="half">
+
+<br><br>
+
+One Kg Cakes:
+<input type="text" id="one">
+
+<br><br>
+
+Two Kg Cakes:
+<input type="text" id="two">
+
+<br><br>
+
+Select Tip:
+
+<input type="radio" name="tip" value="10">
+10%
+
+<input type="radio" name="tip" value="15" checked>
+15%
+
+<input type="radio" name="tip" value="20">
+20%
+
+<br><br>
+
+<button onclick="calculateBill()">
+    Calculate Bill
+</button>
+
+<p id="bill"></p>
+
+<script>
+function calculateBill() {
+
+    var half =
+        parseInt(document.getElementById("half").value);
+
+    var one =
+        parseInt(document.getElementById("one").value);
+
+    var two =
+        parseInt(document.getElementById("two").value);
+
+    var tip =
+        document.querySelector(
+            'input[name="tip"]:checked'
+        ).value;
+
+    var amount =
+        (half * 100) +
+        (one * 200) +
+        (two * 400);
+
+    var tax = amount * 0.09;
+
+    var total = amount + tax;
+
+    total = total + (total * tip / 100);
+
+    document.getElementById("bill").innerHTML =
+        "Total Bill: Rs. " + total.toFixed(2);
+}
+</script>
+
+<hr>
+
+<h3>URK24CS1128 - Web Technology Lab</h3>
+
+</body>
+</html>
